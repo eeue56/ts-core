@@ -1,11 +1,14 @@
 {
-  "name": "ts-core",
+  "name": "@eeue56/ts-core",
   "version": "1.0.0",
   "description": "Core library for TypeScript inspired by Elm",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
   "module": "build/module/index.js",
-  "repository": "https://github.com/eeue56/ts-core",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eeue56/ts-core.git"
+  },
   "license": "MIT",
   "keywords": [],
   "scripts": {
@@ -40,13 +43,12 @@
   "engines": {
     "node": ">=10"
   },
-  "dependencies": {},
   "devDependencies": {
     "@ava/typescript": "^1.1.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
-    "ava": "^3.12.1",
+    "ava": "^3.15.0",
     "codecov": "^3.5.0",
     "cspell": "^4.1.0",
     "cz-conventional-changelog": "^3.3.0",
@@ -59,6 +61,7 @@
     "nyc": "^15.1.0",
     "open-cli": "^6.0.1",
     "prettier": "^2.1.1",
+    "source-map-support": "^0.5.19",
     "standard-version": "^9.0.0",
     "ts-node": "^9.0.0",
     "typedoc": "^0.19.0",
@@ -91,12 +94,21 @@
     }
   },
   "prettier": {
-    "singleQuote": true
+    "singleQuote": true,
+    "tabWidth": 4
   },
   "nyc": {
     "extends": "@istanbuljs/nyc-config-typescript",
     "exclude": [
       "**/*.spec.js"
     ]
-  }
+  },
+  "dependencies": {
+    "@types/node": "^14.14.31"
+  },
+  "bugs": {
+    "url": "https://github.com/eeue56/ts-core/issues"
+  },
+  "homepage": "https://github.com/eeue56/ts-core#readme",
+  "author": "eeue56"
 }
