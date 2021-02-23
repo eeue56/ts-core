@@ -24,7 +24,7 @@ See [src](src/lib/basics.ts)
 Some useful tools for functional programming - piping, and composing. Both of these can be used to chain functions.
 
 ```javascript
-import Basics from 'ts-core';
+import { Basics } from '@eeue56/ts-core';
 
 // take an argument then pipe it to a variable number of functions
 // for example this is 10
@@ -49,7 +49,8 @@ const func = Basics.compose(
 );
 
 // this is 10
-const doubleLength = func('hello');
+const anotherDoubleLength = func('hello');
+console.log('Expecting 10', anotherDoubleLength);
 ```
 
 ## Debug
@@ -59,10 +60,10 @@ See [src](src/lib/debug.ts)
 Not particularly useful in JS as impurity doesn't matter, but sometimes it's nice to log what you're returning.
 
 ```javascript
-import Debug from 'ts-core';
+import { Debug } from '@eeue56/ts-core';
 
 // returns the same object as was logged
-function getSomeObject(object){
+function getSomeObject(someObject){
     return Debug.log("My name is", someObject);
 }
 ```
@@ -75,11 +76,15 @@ A Maybe/Optional type. Useful for when dealing with a value that can either be a
 
 
 ```javascript
-import Maybe from 'ts-core';
+import { Maybe } from '@eeue56/ts-core';
 
-const someMaybe = Maybe.Just(10);
-const newMaybe = Maybe.map(someFunction, someMaybe);
-const someValue = Maybe.withDefault(0, someMaybe);
+const someNothingMaybe = Maybe.Nothing();
+const aValueOfZeroFromTheMaybe = Maybe.withDefault(0, someNothingMaybe);
+
+const identity = (x) => x;
+const someJustMaybe = Maybe.Just(10);
+const newMaybe = Maybe.map(identity, someJustMaybe);
+const aValueOfTenFromTheMaybe = Maybe.withDefault(0, someJustMaybe);
 
 ```
 
@@ -91,14 +96,16 @@ A Result type. Useful for when dealing with a value that can either be a value, 
 
 
 ```javascript
-import Result from 'ts-core';
+import { Result } from '@eeue56/ts-core';
 
 const someResult = Result.Ok(10);
-const newResult = Result.map(someFunction, someResult);
-const someValue = Result.withDefault(0, newResult);
+const double = (x) => x + x;
+const newResult = Result.map(double, someResult);
+const someResultValue = Result.withDefault(0, newResult);
 
 const someError = Result.Err("Failed to parse on line 10");
-const newError = Result.mapError(someFunction, someError);
+const strLength = (x) => x.length;
+const newError = Result.mapError(strLength, someError);
 ```
 
 ## Tuple
@@ -109,11 +116,11 @@ A Tuple type of size 2. Useful for combining a pair of values. Generally named o
 
 
 ```javascript
-import Tuple from 'ts-core';
+import { Tuple } from '@eeue56/ts-core';
 
 const someTuple = Tuple.pair(10, "okay");
-const someNewTuple = Tuple.mapFirst(someFunction, someTuple);
-const someOtherTuple = Tuple.mapSecond(someFunction, someTuple);
+const someNewTuple = Tuple.mapFirst(double, someTuple);
+const someOtherTuple = Tuple.mapSecond(strLength, someTuple);
 const someFirstValue = Tuple.first(someOtherTuple);
 const someSecondValue = Tuple.second(someOtherTuple);
 ```
