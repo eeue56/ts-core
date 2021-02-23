@@ -98,7 +98,7 @@ const newResult = Result.map(someFunction, someResult);
 const someValue = Result.withDefault(0, newResult);
 
 const someError = Result.Err("Failed to parse on line 10");
-const newError = Result.map(someFunction, someError);
+const newError = Result.mapError(someFunction, someError);
 ```
 
 ## Tuple

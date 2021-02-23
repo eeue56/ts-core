@@ -1,6 +1,6 @@
 {
   "name": "@eeue56/ts-core",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.0",
   "description": "Core library for TypeScript inspired by Elm",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
@@ -10,7 +10,7 @@
     "url": "git+https://github.com/eeue56/ts-core.git"
   },
   "license": "MIT",
-  "keywords": [],
+  "keywords": ["elm", "core", "typescript", "ts"],
   "scripts": {
     "build": "run-p build:*",
     "build:main": "tsc -p tsconfig.json",
