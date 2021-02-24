@@ -9,7 +9,6 @@ def main():
     for line in lines:
         if line == '```javascript':
             is_in_code = True
-            print(line)
         elif is_in_code:
             if line == '```':
                 code_examples.append('')

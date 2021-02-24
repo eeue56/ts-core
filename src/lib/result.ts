@@ -50,6 +50,19 @@ export function withDefault<Error, Value>(
 }
 
 /*
+When both error and ok are the same value,
+return the inner value of whichever is contained.
+*/
+export function either<A>(result: Result<A, A>) {
+    switch (result.kind) {
+        case 'ok':
+            return result.value;
+        default:
+            return result.error;
+    }
+}
+
+/*
 Turns Ok into Just, Err into Nothing
 */
 export function toMaybe<Error, Value>(

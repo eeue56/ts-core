@@ -106,6 +106,10 @@ const someResultValue = Result.withDefault(0, newResult);
 const someError = Result.Err("Failed to parse on line 10");
 const strLength = (x) => x.length;
 const newError = Result.mapError(strLength, someError);
+
+const someStringResult = Result.Ok("Hello");
+const hello = Result.either(someStringResult);
+const failedToParseOnLine10 = Result.either(someError);
 ```
 
 ## Tuple

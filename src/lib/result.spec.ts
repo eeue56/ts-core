@@ -22,6 +22,12 @@ test('withDefault', (t) => {
     t.deepEqual(Result.withDefault(defaultValue, aOkValue), aRealValue);
 });
 
+test('either', (t) => {
+    t.deepEqual(Result.either(aOkValue), aRealValue);
+
+    t.deepEqual(Result.either(anErrorValue), anRealErrorValue);
+});
+
 test('toMaybe', (t) => {
     t.deepEqual(Result.toMaybe(anErrorValue), Maybe.Nothing());
 
