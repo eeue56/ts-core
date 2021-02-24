@@ -28,7 +28,7 @@ export function Nothing<A>(): Maybe<A> {
     };
 }
 
-export function isJust<A>(maybe: Maybe<A>): boolean {
+export function isJust<A>(maybe: Maybe<A>): maybe is Just<A> {
     switch (maybe.kind) {
         case 'just':
             return true;
@@ -37,7 +37,7 @@ export function isJust<A>(maybe: Maybe<A>): boolean {
     }
 }
 
-export function isNothing<A>(maybe: Maybe<A>): boolean {
+export function isNothing<A>(maybe: Maybe<A>): maybe is Just<A> {
     switch (maybe.kind) {
         case 'nothing':
             return true;
