@@ -2,6 +2,8 @@
 
 Core library for TypeScript inspired by [Elm](https://package.elm-lang.org/packages/elm/core/latest/). It contains only some of the more relevant data structures and functions.
 
+Part of the [Hiraeth](https://github.com/eeue56/hiraeth) collection.
+
 # Installation
 
 ```

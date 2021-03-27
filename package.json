@@ -10,7 +10,7 @@
     "url": "git+https://github.com/eeue56/ts-core.git"
   },
   "license": "MIT",
-  "keywords": ["elm", "core", "typescript", "ts"],
+  "keywords": ["elm", "core", "typescript", "ts", "hiraeth"],
   "scripts": {
     "build": "run-p build:*",
     "build:main": "tsc -p tsconfig.json",
