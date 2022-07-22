@@ -1,12 +1,12 @@
 import * as Maybe from './maybe';
 
 export type Err<Error> = {
-    kind: 'err';
+    kind: 'Err';
     error: Error;
 };
 
 export type Ok<Value> = {
-    kind: 'ok';
+    kind: 'Ok';
     value: Value;
 };
 
@@ -17,7 +17,7 @@ Creates an Ok value
 */
 export function Ok<Error, Value>(value: Value): Result<Error, Value> {
     return {
-        kind: 'ok',
+        kind: 'Ok',
         value: value,
     };
 }
@@ -27,7 +27,7 @@ Creates an Err value
 */
 export function Err<Error, Value>(error: Error): Result<Error, Value> {
     return {
-        kind: 'err',
+        kind: 'Err',
         error: error,
     };
 }
@@ -41,7 +41,7 @@ export function withDefault<Error, Value>(
     result: Result<Error, Value>
 ): Value {
     switch (result.kind) {
-        case 'ok':
+        case 'Ok':
             return result.value;
 
         default:
@@ -50,12 +50,12 @@ export function withDefault<Error, Value>(
 }
 
 /*
-When both error and ok are the same value,
+When both error and Ok are the same value,
 return the inner value of whichever is contained.
 */
 export function either<A>(result: Result<A, A>) {
     switch (result.kind) {
-        case 'ok':
+        case 'Ok':
             return result.value;
         default:
             return result.error;
@@ -69,7 +69,7 @@ export function toMaybe<Error, Value>(
     result: Result<Error, Value>
 ): Maybe.Maybe<Value> {
     switch (result.kind) {
-        case 'ok':
+        case 'Ok':
             return Maybe.Just(result.value);
         default:
             return Maybe.Nothing();
@@ -84,7 +84,7 @@ export function fromMaybe<Error, Value>(
     maybe: Maybe.Maybe<Value>
 ): Result<Error, Value> {
     switch (maybe.kind) {
-        case 'just':
+        case 'Just':
             return Ok(maybe.value);
         default:
             return Err(error);
@@ -100,7 +100,7 @@ export function map<Error, A, Value>(
     result: Result<Error, A>
 ): Result<Error, Value> {
     switch (result.kind) {
-        case 'ok':
+        case 'Ok':
             return Ok(func(result.value));
 
         default:
@@ -118,9 +118,9 @@ export function map2<Error, A, B, Value>(
     secondResult: Result<Error, B>
 ): Result<Error, Value> {
     switch (firstResult.kind) {
-        case 'ok':
+        case 'Ok':
             switch (secondResult.kind) {
-                case 'ok':
+                case 'Ok':
                     return Ok(func(firstResult.value, secondResult.value));
 
                 default:
@@ -142,11 +142,11 @@ export function map3<Error, A, B, C, Value>(
     thirdResult: Result<Error, C>
 ): Result<Error, Value> {
     switch (firstResult.kind) {
-        case 'ok':
+        case 'Ok':
             switch (secondResult.kind) {
-                case 'ok':
+                case 'Ok':
                     switch (thirdResult.kind) {
-                        case 'ok':
+                        case 'Ok':
                             return Ok(
                                 func(
                                     firstResult.value,
@@ -176,7 +176,7 @@ export function mapError<ErrorA, ErrorB, Value>(
     result: Result<ErrorA, Value>
 ): Result<ErrorB, Value> {
     switch (result.kind) {
-        case 'err':
+        case 'Err':
             return Err(func(result.error));
 
         default:
@@ -193,7 +193,7 @@ export function andThen<Error, A, B>(
     result: Result<Error, A>
 ): Result<Error, B> {
     switch (result.kind) {
-        case 'ok':
+        case 'Ok':
             return func(result.value);
 
         default:

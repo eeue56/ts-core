@@ -1,9 +1,9 @@
 export type Nothing = {
-    kind: 'nothing';
+    kind: 'Nothing';
 };
 
 export type Just<A> = {
-    kind: 'just';
+    kind: 'Just';
     value: A;
 };
 
@@ -14,7 +14,7 @@ Create a Maybe with an actual value
 */
 export function Just<A>(value: A): Maybe<A> {
     return {
-        kind: 'just',
+        kind: 'Just',
         value: value,
     };
 }
@@ -24,13 +24,13 @@ Create a Maybe with no value
 */
 export function Nothing<A>(): Maybe<A> {
     return {
-        kind: 'nothing',
+        kind: 'Nothing',
     };
 }
 
 export function isJust<A>(maybe: Maybe<A>): maybe is Just<A> {
     switch (maybe.kind) {
-        case 'just':
+        case 'Just':
             return true;
         default:
             return false;
@@ -39,7 +39,7 @@ export function isJust<A>(maybe: Maybe<A>): maybe is Just<A> {
 
 export function isNothing<A>(maybe: Maybe<A>): maybe is Just<A> {
     switch (maybe.kind) {
-        case 'nothing':
+        case 'Nothing':
             return true;
         default:
             return false;
@@ -52,7 +52,7 @@ Otherwise return the provided value
 */
 export function withDefault<A>(value: A, maybeValue: Maybe<A>): A {
     switch (maybeValue.kind) {
-        case 'just':
+        case 'Just':
             return maybeValue.value;
 
         default:
@@ -62,14 +62,14 @@ export function withDefault<A>(value: A, maybeValue: Maybe<A>): A {
 
 /*
 If a maybe has a value, apply a function to it and return a maybe containing the new value.
-Otherwise return nothing.
+Otherwise return Nothing.
 */
 export function map<A, Value>(
     func: (val: A) => Value,
     maybeValue: Maybe<A>
 ): Maybe<Value> {
     switch (maybeValue.kind) {
-        case 'just':
+        case 'Just':
             return Just(func(maybeValue.value));
 
         default:
@@ -79,7 +79,7 @@ export function map<A, Value>(
 
 /*
 If both maybes have a value, apply a function to them and return a maybe containing the new value.
-Otherwise return nothing.
+Otherwise return Nothing.
 */
 export function map2<A, B, Value>(
     func: (firstValue: A, secondValue: B) => Value,
@@ -87,9 +87,9 @@ export function map2<A, B, Value>(
     secondMaybeValue: Maybe<B>
 ): Maybe<Value> {
     switch (firstMaybeValue.kind) {
-        case 'just':
+        case 'Just':
             switch (secondMaybeValue.kind) {
-                case 'just':
+                case 'Just':
                     return Just(
                         func(firstMaybeValue.value, secondMaybeValue.value)
                     );
@@ -104,7 +104,7 @@ export function map2<A, B, Value>(
 
 /*
 If all maybes have a value, apply a function to them and return a maybe containing the new value.
-Otherwise return nothing.
+Otherwise return Nothing.
 */
 export function map3<A, B, C, Value>(
     func: (firstValue: A, secondValue: B, thirdValue: C) => Value,
@@ -113,11 +113,11 @@ export function map3<A, B, C, Value>(
     thirdMaybeValue: Maybe<C>
 ): Maybe<Value> {
     switch (firstMaybeValue.kind) {
-        case 'just':
+        case 'Just':
             switch (secondMaybeValue.kind) {
-                case 'just':
+                case 'Just':
                     switch (thirdMaybeValue.kind) {
-                        case 'just':
+                        case 'Just':
                             return Just(
                                 func(
                                     firstMaybeValue.value,
@@ -140,14 +140,14 @@ export function map3<A, B, C, Value>(
 
 /*
 If the maybe has a value, apply a function that turns things into a maybe to it.
-Otherwise return nothing.
+Otherwise return Nothing.
 */
 export function andThen<A, B>(
     func: (firstValue: A) => Maybe<B>,
     maybeValue: Maybe<A>
 ): Maybe<B> {
     switch (maybeValue.kind) {
-        case 'just':
+        case 'Just':
             return func(maybeValue.value);
 
         default:
